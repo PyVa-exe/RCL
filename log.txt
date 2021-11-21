@@ -1,0 +1,3 @@
+tag 2:
+    nachdem wir die Idee für rcl hatten, werde ich jetzt am zweiten Tag anfangen die
+    syntaktischen Elemente der Sprache zu definieren (grammar.txt, also start of git history)
