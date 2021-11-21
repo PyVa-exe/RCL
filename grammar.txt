@@ -1,3 +1,7 @@
 rcl - robot control language
 
+move    <steps> - move forward  the robot by <steps>
+back    <steps> - move backward the robot by <steps> 
+left    <angle> - turn left by <angle>
+right   <angle> - turn right by <angle>
 
