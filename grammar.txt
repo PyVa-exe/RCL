@@ -1,9 +1,20 @@
 rcl - robot control language
 
-forward     <speed> - move forward  with <speed> speed
-backward    <speed> - move backward with <speed> speed 
-left        <speed> - turn left with  <speed> speed
-right       <speed> - turn right with <speed> speed
 
-<varname> = <value> - set variable <varname> to <value>
+
+movement command:
+    forward     <speed> - move forward  with <speed> speed
+    backward    <speed> - move backward with <speed> speed 
+    left        <speed> - turn left with  <speed> speed
+    right       <speed> - turn right with <speed> speed
+    stop                - stop robot from moving
+
+    all movement commands will override previous movement command
+
+flow control:
+    wait <time>         - wait <time> seconds
+    exit                - terminate program
+
+memory:
+    <varname> = <value> - set variable <varname> to <value>
 

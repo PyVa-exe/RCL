@@ -1,3 +1,10 @@
 tag 2:
-    nachdem wir die Idee für rcl hatten, werde ich jetzt am zweiten Tag anfangen die
-    syntaktischen Elemente der Sprache zu definieren (grammar.txt, also start of git history)
+    Nachdem wir die Idee für rcl hatten, habe ich jetzt am zweiten Tag anfangen die
+    syntaktischen Elemente der Sprache zu definieren (grammar.txt, also start of git history).
+    Außerdem habe ich angefangen den assembler und den eigentlichen interpreter zu schreiben.
+    Mit den einfachsten Befehlen.
+    
+tag 3:
+    Ich habe mehr einfache control-flow Befehle implementiert
+    
+    

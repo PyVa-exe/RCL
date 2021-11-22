@@ -8,35 +8,57 @@ def Assemble(xRaw):
     
     xIndex = 0
     for xLine in xRaw.split("\n"):
-        xCommand = xLine.split(" ")[0]
-        xArgs    = xLine.split(" ")[1:]
+        xLineTerminals = xLine.split(" ")
+        xCommand = xLineTerminals[0]
+        if len(xLineTerminals) > 1: xArgs = xLineTerminals[1:] 
 
+        
+        xTempBuffer = []
         if xCommand == "forward":
-            xOutputBuffer.append(0) #command
-            xOutputBuffer.append(float(xArgs[0]) / 100 * 255) #arg (value needs to be converted to 8-bit spectrum)
+            xTempBuffer.append(0.0) #command
+            xTempBuffer.append(float(xArgs[0]) / 100 * 255) #arg (value needs to be converted to 8-bit spectrum)
                         
-            xIndex += 2
-
-            
         elif xCommand == "backward":
-            xOutputBuffer.append(1)
-            xOutputBuffer.append(float(xArgs[0]) / 100 * 255)
-
-            xIndex += 2
+            xTempBuffer.append(1.0)
+            xTempBuffer.append(float(xArgs[0]) / 100 * 255)
 
 
         elif xCommand == "left":
-            xOutputBuffer.append(2)
-            xOutputBuffer.append(float(xArgs[0]) / 100 * 255)
-            
-            xIndex += 2
+            xTempBuffer.append(2.0)
+            xTempBuffer.append(float(xArgs[0]) / 100 * 255)
 
 
         elif xCommand == "right":
-            xOutputBuffer.append(3)
-            xOutputBuffer.append(float(xArgs[0]) / 100 * 255)
-                        
-            xIndex += 2
+            xTempBuffer.append(3.0)
+            xTempBuffer.append(float(xArgs[0]) / 100 * 255)
+
+
+        elif xCommand == "stop":
+            xTempBuffer.append(4.0)
+
+        elif xCommand == "wait":
+            xTempBuffer.append(5.0)
+            xTempBuffer.append(float(xArgs[0]))
+
+        elif xCommand == "exit":
+            xTempBuffer.append(6.0)
+
+
+
+        #handle commands with complex syntax structure
+        #var set
+        if len(xLineTerminals) > 2 and xLineTerminals[1] == "=":
+            xTempBuffer.append(7.0)
+            xTempBuffer.append(xLineTerminals[0])
+            xTempBuffer.append(xLineTerminals[2])
+            
+
+
+
+        xOutputBuffer += [str(x) for x in xTempBuffer]
+
+        #check for the difference of the array length, to adjust index
+        xIndex += len(xTempBuffer)
             
             
         
@@ -47,6 +69,6 @@ if __name__ == '__main__':
     xPath = sys.argv[1]
     xFile = open(xPath, "r").read()
     
-    print(Assemble(xFile))
+    print("{ " + ", ".join(Assemble(xFile)) + " }")
     
 
