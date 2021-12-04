@@ -15,6 +15,13 @@ flow control:
     wait <time>         - wait <time> seconds
     exit                - terminate program
 
+		point <point name> 	- define point with name <point name>
+		jump <point name>		- jump the point with name <point name>
+		if <senor name> = <constValue> then <point name> - jump to <point name> if <sensorValue> is equal to <constValue>
+		if <senor name> > <constValue> then <point name> - jump to <point name> if <sensorValue> is bigger than <constValue>
+		if <senor name> < <constValue> then <point name> - jump to <point name> if <sensorValue> is smaller than <constValue>
+
+
 memory:
     <varname> = <value> - set variable <varname> to <value>
 
