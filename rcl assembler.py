@@ -1,68 +1,88 @@
 import sys
-#bad code, i know, and i don't know
+#bad code, i know, and i don't care
+
+
 
 
 
 def Assemble(xRaw):
-    xOutputBuffer = []
-    
-    xIndex = 0
-    for xLine in xRaw.split("\n"):
-        xLineTerminals = xLine.split(" ")
-        xCommand = xLineTerminals[0]
-        if len(xLineTerminals) > 1: xArgs = xLineTerminals[1:] 
-
-        
-        xTempBuffer = []
-        if xCommand == "forward":
-            xTempBuffer.append(0.0) #command
-            xTempBuffer.append(float(xArgs[0]) / 100 * 255) #arg (value needs to be converted to 8-bit spectrum)
-                        
-        elif xCommand == "backward":
-            xTempBuffer.append(1.0)
-            xTempBuffer.append(float(xArgs[0]) / 100 * 255)
+		xOutputBuffer = []
+		xLines = xRaw.split("\n")
+		xPointMapper = {}
+		xCommands = ["forward", "backward", "left", "right", "stop", "wait", "exit", "jump", "if"]
 
 
-        elif xCommand == "left":
-            xTempBuffer.append(2.0)
-            xTempBuffer.append(float(xArgs[0]) / 100 * 255)
+		xIndex = 0
+		for xLine in xLines:
+			xLineTerminals = xLine.split(" ")
+			
+			if len(xLineTerminals) > 0 and xLineTerminals[0] == "point":
+				xPointMapper[xLineTerminals[1]] = xIndex
 
+			elif xLineTerminals[0] is xCommands: pass
+			else: continue
 
-        elif xCommand == "right":
-            xTempBuffer.append(3.0)
-            xTempBuffer.append(float(xArgs[0]) / 100 * 255)
+			xIndex += 1
 
-
-        elif xCommand == "stop":
-            xTempBuffer.append(4.0)
-
-        elif xCommand == "wait":
-            xTempBuffer.append(5.0)
-            xTempBuffer.append(float(xArgs[0]))
-
-        elif xCommand == "exit":
-            xTempBuffer.append(6.0)
+		print(xPointMapper)
 
 
 
-        #handle commands with complex syntax structure
-        #var set
-        if len(xLineTerminals) > 2 and xLineTerminals[1] == "=":
-            xTempBuffer.append(7.0)
-            xTempBuffer.append(xLineTerminals[0])
-            xTempBuffer.append(xLineTerminals[2])
-            
+		xIndex = 0
+		# iterate over lines
+		for xLine in xLines:
+				xLineTerminals = xLine.split(" ")
+				xCommand = xLineTerminals[0]
+				if len(xLineTerminals) > 1: xArgs = xLineTerminals[1:] 
+
+				
+				xTempBuffer = []
+				if xCommand == "forward":
+						xTempBuffer.append(0.0) #command
+						xTempBuffer.append(float(xArgs[0]) / 100 * 255) #arg (value needs to be converted to 8-bit spectrum)
+												
+				elif xCommand == "backward":
+						xTempBuffer.append(1.0)
+						xTempBuffer.append(float(xArgs[0]) / 100 * 255)
+
+
+				elif xCommand == "left":
+						xTempBuffer.append(2.0)
+						xTempBuffer.append(float(xArgs[0]) / 100 * 255)
+
+
+				elif xCommand == "right":
+						xTempBuffer.append(3.0)
+						xTempBuffer.append(float(xArgs[0]) / 100 * 255)
+
+
+				elif xCommand == "stop":
+						xTempBuffer.append(4.0)
+
+				elif xCommand == "wait":
+						xTempBuffer.append(5.0)
+						xTempBuffer.append(float(xArgs[0]))
+
+				elif xCommand == "exit":
+						xTempBuffer.append(6.0)
+
+				elif xCommand == "jump":
+						xTempBuffer.append(7.0)
+						xPointName = xLineTerminals[1]
+						xPointIndex = xPointMapper[xPointName]
+						xTempBuffer.append(float(xPointIndex))
 
 
 
-        xOutputBuffer += [str(x) for x in xTempBuffer]
 
-        #check for the difference of the array length, to adjust index
-        xIndex += len(xTempBuffer)
-            
-            
-        
-    return xOutputBuffer
+				xOutputBuffer += [str(x) for x in xTempBuffer]
+
+				#check for the difference of the array length, to adjust index
+				xIndex += len(xTempBuffer)
+						
+						
+				
+		return xOutputBuffer
 
 
 if __name__ == '__main__':
