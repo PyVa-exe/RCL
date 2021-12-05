@@ -1,0 +1,39 @@
+
+
+
+point mainLoop
+wait 0.1
+
+if lineSensor = 0 then moveFor
+if lineSensor = 1 then moveLeft
+if lineSensor = 2 then moveRight
+if lineSensor = 3 then stop
+jump mainLoop
+
+
+
+point moveFor
+forward 50
+jump mainLoop
+
+point moveLeft
+left 50
+jump mainLoop
+
+point moveRight
+right 50
+jump mainLoop
+
+point stop
+stop
+jump mainLoop
+
+
+
+
+
+
+
+
+
+

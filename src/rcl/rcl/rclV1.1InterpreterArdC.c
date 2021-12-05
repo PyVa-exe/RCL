@@ -114,11 +114,11 @@ void setup()
             switch(sensorCode)
             {
                 case 0:
-                    sensorValue = linefollower.readSensors();
+                    sensorValue = (int)linefollower.readSensors();
                     break;
 
                 case 1:
-                    sensorValue = ultrasonic.distanceCm();
+                    sensorValue = (int)ultrasonic.distanceCm();
                     break;
 
             }

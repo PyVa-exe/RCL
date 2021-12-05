@@ -1,0 +1,8 @@
+point start
+
+forward 100
+wait 1
+left 50
+wait 0.5
+
+jump start

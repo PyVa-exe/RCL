@@ -11,6 +11,14 @@ def Assemble(xRaw):
 		xPointMapper = {}
 		xCommands = ["forward", "backward", "left", "right", "stop", "wait", "exit", "jump", "if"]
 
+		xSensorDec = {
+				"lineSensor" : 0.0,
+				"ultraSensor" : 1.0,
+				
+			
+			
+			}
+
 
 		xIndex = 0
 		for xLine in xLines:
@@ -23,8 +31,6 @@ def Assemble(xRaw):
 			else: continue
 
 			xIndex += 1
-
-		print(xPointMapper)
 
 
 
@@ -72,7 +78,15 @@ def Assemble(xRaw):
 						xPointIndex = xPointMapper[xPointName]
 						xTempBuffer.append(float(xPointIndex))
 
-
+				elif xCommand == "if":
+					xSensorCode = xSensorDec[xArgs[0]]
+					xCompType = {"=" : 0.0, ">" : 1.0, "<" : 2.0}[xArgs[1]]
+					xConstValue = float(xArgs[2])
+					
+					xTempBuffer.append(8.0)
+					xTempBuffer.append(xSensorCode)
+					xTempBuffer.append(xCompType)
+					xTempBuffer.append(xConstValue)
 
 
 				xOutputBuffer += [str(x) for x in xTempBuffer]
@@ -89,6 +103,8 @@ if __name__ == '__main__':
     xPath = sys.argv[1]
     xFile = open(xPath, "r").read()
     
-    print("{ " + ", ".join(Assemble(xFile)) + " }")
+    xPythonOutputFormat = "--py" in sys.argv
     
+    if not xPythonOutputFormat: print("{ " + ", ".join(Assemble(xFile)) + " }")
+    else:						print("[ " + ", ".join(Assemble(xFile)) + " ]")
 
