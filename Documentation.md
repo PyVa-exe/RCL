@@ -21,7 +21,7 @@ In den ersten Stunden haben wir uns überlegt, was wir überhaupt machen, doch u
 ob Python überhaupt funtioniert. Nein. Lösung: Eine eigene Sprache muss her.
 So ist RCL entstanden. 
 
-Hier sind die Befehle:
+### Befehle
 ```
 Bewegungsbefehle:
     forward     <speed> - roboter soll sich mit <speed> nach vorne bewegen
@@ -47,7 +47,8 @@ Speicher:
 
 ```
 
-Beispielcode:
+<br/>
+
 ```
 point start
 
@@ -64,5 +65,5 @@ jump start
 
 # Entwicklung
 ## Struktogramme
-## Fehleranalyse
+*insert structograms her*
 ## Tagebuch
