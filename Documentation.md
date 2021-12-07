@@ -72,7 +72,7 @@ RCL hat die Kontrolle über zwei Sensoren, den LineFinding-Sensor und den Ultras
 
 ***18.11***: In diesen zwei Stunden haben wir zuerst Ideen gesammelt und hatten wir einen groben Plan, wie unser Projekt aussehen wird. Danach haben wir versucht, die Python IDE zu starten und es hat leider nicht funktioniert. Nach vielen hoffnungslosen versuchen haben wir uns entschlossen, ArduinoC zu benutzen, da wir keine andere Möglichkeit hatten außer Scratch und ArduinoC zu benutzen.
 
-***23.11****: Langsam nimmt der Assembler und der Interpreter Form an und die ersten Befehle scheinen zu funktionieren. Doch schnell kommt das erste Problem und Debugging steht an.
+***23.11***: Langsam nimmt der Assembler und der Interpreter Form an und die ersten Befehle scheinen zu funktionieren. Doch schnell kommt das erste Problem und Debugging steht an.
 
 ***25.11***: Nach ein wenig Debugging funktioniert das erste Testprogramm und wir fangen an, an die Sensoren zu denken. Nach einem Konzept geht es wieder an die Arbeit doch es geht nicht voran. Fast nichts scheint zu funktionieren, Sensoren geben nichts zurück, Motoren machen nichts, usw.
 
