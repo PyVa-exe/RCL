@@ -1,94 +1,161 @@
 
 //arduino bullshit
-//#include <MeMCore.h>
-//#include <Arduino.h>
-//#include <Wire.h>
-//#include <SoftwareSerial.h>
+#include <MeMCore.h>
+#include <Arduino.h>
+#include <Wire.h>
+#include <SoftwareSerial.h>
 
-#include <stdio.h>
-#include <time.h>
-
-
-long millis()
-{
-	clock_t timer;
-	timer = clock();
-	return (long)timer;
-}
+MeDCMotor motor0(9);
+MeDCMotor motor1(10);
+MeBuzzer buzzer;
+MeRGBLed rgbled(7, 2);
+MeLineFollower linefollower(3);
+MeUltrasonicSensor ultrasonic(3);
 
 
-void delay(float seconds) {
+void delayMs(float seconds) {
 	long endTime = millis() + seconds * 1000;
 	while (millis() < endTime);
 }
 
 
 
+//takes 2 values from 0 to 100, setting the speed of the 2 motor on the robot
+void setRobotMoveDir(float m0, float m1)
+{
+    int mMapped0 = (int)(m0 / 100.0 * 255);
+    int mMapped1 = (int)(m1 / 100.0 * 255);
+
+    motor0.run(mMapped0);
+    motor1.run(-mMapped1);
+
+
+}
+
+
+
+
 void loop() {};
 void setup()
 {
-	float code[] = { 2.0, 229.5, 5.0, 1.0, 0.0, 25.5, 5.0, 1.0, 3.0, 229.5, 5.0, 1.0, 0.0, 25.5, 5.0, 1.0, 4.0, 6.0 };
+	float code[] = { 0.0, 255.0, 5.0, 2.0, 2.0, 255.0, 5.0, 0.5, 7.0, 0.0 };
 	int codeSize = sizeof(code) / sizeof(float);
-	float* execPtr = code;
+    int execPtr = 0;
 
 	short isRunning = 1;
+
+    setRobotMoveDir(0, 0);
+
+    pinMode(A7, INPUT);
+  while(!(((analogRead(A7) > 10 ? 0 : 1))));
+
+    rgbled.fillPixelsBak(0, 2, 1);
+    rgbled.setColor(0, 0, 255, 0);
+    rgbled.show();
+
+
 
 	while (isRunning)
 	{
 
-		int command = (int)*execPtr;
 
+
+		int command = (int)code[execPtr];
+        float attr  = (float)code[execPtr + 1];
 
 		switch (command)
 		{
 		case 0:
-			printf("forward\n");
+            setRobotMoveDir(attr, attr);
 			execPtr += 2;
 			break;
 
 		case 1:
-			printf("backward\n");
+            setRobotMoveDir(-attr, -attr);
 			execPtr += 2;
 			break;
 
 		case 2:
-			printf("left\n");
+            setRobotMoveDir(attr, -attr);
 			execPtr += 2;
 			break;
 
 		case 3:
-			printf("right\n");
+            setRobotMoveDir(-attr, attr);
 			execPtr += 2;
 			break;
 
 		case 4:
-			printf("stop\n");
+            setRobotMoveDir(0, 0);
 			execPtr += 1;
 			break;
 
 		case 5:
-			delay(*(execPtr + 1));
+			delayMs(attr);
 			execPtr += 2;
 			break;
 
 		case 6:
 			isRunning = 0;
 			break;
+
+        case 7:
+            execPtr = (int)attr;
+            break;
+
+        case 8:
+            int sensorCode = (int)code[execPtr + 1];
+            int compType   = (int)code[execPtr + 2];
+            int constValue = (int)code[execPtr + 3];
+
+            int sensorValue = NULL;
+
+            //get the sensor values
+            switch(sensorCode)
+            {
+                case 0:
+                    sensorValue = linefollower.readSensors();
+                    break;
+
+                case 1:
+                    sensorValue = ultrasonic.distanceCm();
+                    break;
+
+            }
+
+            //do comp and override execPtr based on result
+            switch(compType)
+            {
+                //==
+                case 0:
+                    if(sensorValue == constValue) execPtr = (int)attr;
+                    break;
+
+                //sensor > const
+                case 1:
+                    if(sensorValue > constValue) execPtr = (int)attr;
+                    break;
+
+                //sensor < const
+                case 2:
+                    if(sensorValue < constValue) execPtr = (int)attr;
+                    break;
+
+
+            }
+
+
+			execPtr += 4;
+            break;
+
 		}
 
 	}
 
+    rgbled.fillPixelsBak(0, 2, 1);
+    rgbled.setColor(0, 255, 0, 0);
+    rgbled.show();
 
-	printf("exit");
 
 }
 
-
-
-int main()
-{
-	setup();
-	for (;;) loop();
-
-	return 0;
-}
