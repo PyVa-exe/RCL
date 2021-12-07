@@ -61,7 +61,8 @@ jump start
 ```
 *Dieser Code bewegt sich für 2 Sekunden nach vorne, 0.5 Sekunden nach links und wiederholt dies fortlaufend.*
 
-
+## Welche Sensoren und Aktoren haben wir benutzt und wie funktioniert die Implementation
+RCL hat die Kontrolle über zwei Sensoren, den LineFinding-Sensor und den Ultraschall-Sensor. Diese kann man mit einer Kondition ansprechen. ```if lineSensor = 0 then <aktion>```
 
 # Entwicklung
 ## Struktogramme
