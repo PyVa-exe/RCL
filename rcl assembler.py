@@ -20,6 +20,20 @@ def Assemble(xRaw):
 			}
 
 
+		xSpaceMapper = {
+				"forward" : 2,
+				"backward" : 2,
+				"left" : 2,
+				"right" : 2,  
+				"stop" : 1,
+				"wait" : 2,
+				"exit" : 1,
+				"jump" : 2,
+				"if" : 5,
+			
+			}
+
+
 		xIndex = 0
 		for xLine in xLines:
 			xLineTerminals = xLine.split(" ")
@@ -27,10 +41,7 @@ def Assemble(xRaw):
 			if len(xLineTerminals) > 0 and xLineTerminals[0] == "point":
 				xPointMapper[xLineTerminals[1]] = xIndex
 
-			elif xLineTerminals[0] is xCommands: pass
-			else: continue
-
-			xIndex += 1
+			elif xLineTerminals[0] in xSpaceMapper.keys(): xIndex += xSpaceMapper[xLineTerminals[0]]
 
 
 
@@ -82,12 +93,16 @@ def Assemble(xRaw):
 					xSensorCode = xSensorDec[xArgs[0]]
 					xCompType = {"=" : 0.0, ">" : 1.0, "<" : 2.0}[xArgs[1]]
 					xConstValue = float(xArgs[2])
+
+					xPointName = xArgs[4]
+					xPointIndex = xPointMapper[xPointName]
+
 					
-					xTempBuffer.append(8.0)
+					xTempBuffer.append(8.0)					
+					xTempBuffer.append(float(xPointIndex))
 					xTempBuffer.append(xSensorCode)
 					xTempBuffer.append(xCompType)
 					xTempBuffer.append(xConstValue)
-
 
 				xOutputBuffer += [str(x) for x in xTempBuffer]
 
@@ -95,7 +110,6 @@ def Assemble(xRaw):
 				xIndex += len(xTempBuffer)
 						
 						
-				
 		return xOutputBuffer
 
 

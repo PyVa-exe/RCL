@@ -104,9 +104,9 @@ void setup()
             break;
 
         case 8:
-            int sensorCode = (int)code[execPtr + 1];
-            int compType   = (int)code[execPtr + 2];
-            int constValue = (int)code[execPtr + 3];
+            int sensorCode = (int)code[execPtr + 2];
+            int compType   = (int)code[execPtr + 3];
+            int constValue = (int)code[execPtr + 4];
 
             int sensorValue = NULL;
 
@@ -123,30 +123,33 @@ void setup()
 
             }
 
+            int hasSet = 0;
+
             //do comp and override execPtr based on result
             switch(compType)
             {
                 //==
                 case 0:
-                    if(sensorValue == constValue) execPtr = (int)attr;
+                    if(sensorValue == constValue) hasSet = 1;
                     break;
 
                 //sensor > const
                 case 1:
-                    if(sensorValue > constValue) execPtr = (int)attr;
+                    if(sensorValue > constValue) hasSet = 1;
                     break;
 
                 //sensor < const
                 case 2:
-                    if(sensorValue < constValue) execPtr = (int)attr;
+                    if(sensorValue < constValue) hasSet = 1;
                     break;
+
 
 
             }
 
 
-			execPtr += 4;
-            break;
+            if(hasSet) execPtr = (int)attr;
+            else execPtr += 4;
 
 		}
 
