@@ -66,7 +66,44 @@ RCL hat die Kontrolle über zwei Sensoren, den LineFinding-Sensor und den Ultras
 
 # Entwicklung
 ## Struktogramme
-*insert structograms her*
+```
+Assembler
+
+
+ ┌─────┐
+ │Start│
+ └──┬──┘
+    │
+ ┌──▼────────────────────────────┐
+ │Datei mit Eingabeprogramm lesen│
+ └──┬────────────────────────────┘
+    │
+ ┌──▼───────────────────────────────┐
+ │Nächsten Befehl von Programm laden◄───────────────┐
+ └──┬───────────────────────────────┘               │
+    │                                               │
+ ┌──▼─────────────────────────────────────────────┐ │
+ │Befehl plus angegebene Daten zu Zahlen umwandeln│ │
+ └──┬─────────────────────────────────────────────┘ │
+    │                                               │
+ ┌──▼──────────────────────────────────┐            │
+ │Sind noch Befehle zum Übersetzten da?│            │
+ └──┬────────────────────────────────┬─┘            │
+    │                                │              │
+   Nein                             Ja              │
+    │                                │              │
+ ┌──▼──────────────────────┐         │              │
+ │Übersetzte Daten ausgeben│         └──────────────┘
+ └──┬──────────────────────┘
+    │
+ ┌──▼─┐
+ │Ende│
+ └────┘
+```
+
+
+
+
 ## Tagebuch
 ***16.11***: Wir haben uns mit dem Projektaufbau vertraut gemacht und haben angefangen zu planen.
 
