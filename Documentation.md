@@ -113,15 +113,15 @@ Assembler                                                             Interprete
 ## Tagebuch
 ***16.11***: Wir haben uns mit dem Projektaufbau vertraut gemacht und haben angefangen zu planen.
 
-***18.11***: In diesen zwei Stunden haben wir zuerst Ideen gesammelt und hatten wir einen groben Plan, wie unser Projekt aussehen wird. Danach haben wir versucht, die Python IDE zu starten und es hat leider nicht funktioniert. Nach vielen hoffnungslosen versuchen haben wir uns entschlossen, ArduinoC zu benutzen, da wir keine andere Möglichkeit hatten außer Scratch und ArduinoC zu benutzen.
+***18.11 + 19.11***: In diesen drei Stunden haben wir zuerst Ideen gesammelt und hatten wir einen groben Plan, wie unser Projekt aussehen wird. Danach haben wir versucht, die Python IDE zu starten und es hat leider nicht funktioniert. Nach vielen hoffnungslosen Versuchen haben wir uns entschlossen, ArduinoC zu benutzen, da wir keine andere Möglichkeit hatten außer Scratch und ArduinoC zu benutzen.
 
 ***23.11***: Langsam nimmt der Assembler und der Interpreter Form an und die ersten Befehle scheinen zu funktionieren. Doch schnell kommt das erste Problem und Debugging steht an.
 
-***25.11***: Nach ein wenig Debugging funktioniert das erste Testprogramm und wir fangen an, an die Sensoren zu denken. Nach einem Konzept geht es wieder an die Arbeit doch es geht nicht voran. Fast nichts scheint zu funktionieren, Sensoren geben nichts zurück, Motoren machen nichts, usw.
+***25.11 + 26.11***: Nach ein wenig Debugging funktioniert das erste Testprogramm und wir fingen an, an die Sensoren zu denken. Nach einem Konzept geht es wieder an die Arbeit doch es geht nicht voran. Fast nichts scheint zu funktionieren, Sensoren geben nichts zurück, Motoren machen nichts, usw.
 
 ***30.11***: Probleme über Probleme, nichts scheint zu funktionieren. Verzweifelt versuchen wir wenigstens die einfachsten Testprogramme zum Laufen zu bekommen.
 
-***02.12***: Es scheint wieder zu funktionieren und wir arbeiten an einfachen Bugs in unserer Software. Während Simon weiter an Fehlern arbeitet, fängt Niklas an mit der Dokumentation.
+***02.12 + 03.12***: Es scheint wieder zu funktionieren und wir arbeiten an einfachen Bugs in unserer Software. Während Simon weiter an Fehlern arbeitet, fängt Niklas an mit der Dokumentation.
 
 ***07.12***: Niklas arbeitet weiter an der Dokumentation, während Simon an dem LineFinder weiterarbeitet, was scheinbar nicht funktioniert. 
 
