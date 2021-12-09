@@ -21,6 +21,7 @@ In den ersten Stunden haben wir uns überlegt, was wir überhaupt machen, doch u
 ob Python überhaupt funtioniert. Nein. Lösung: Eine eigene Sprache muss her.
 So ist RCL entstanden. 
 
+# Implementation
 ### Befehle
 ```
 Bewegungsbefehle:
@@ -61,7 +62,7 @@ jump start
 ```
 *Dieser Code bewegt sich für 2 Sekunden nach vorne, 0.5 Sekunden nach links und wiederholt dies fortlaufend.*
 
-## Welche Sensoren und Aktoren haben wir benutzt und wie funktioniert die Implementation
+### Welche Sensoren und Aktoren haben wir benutzt und wie funktioniert die Implementation
 RCL hat die Kontrolle über zwei Sensoren, den LineFinding-Sensor und den Ultraschall-Sensor. Diese kann man mit einer Kondition ansprechen. ```if lineSensor = 0 then <aktion>```
 
 # Entwicklung
